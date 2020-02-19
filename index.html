@@ -15,31 +15,41 @@
                     APP CONVERSORES
                 </div>
             </div>
-            <div class="row cols-4">
+            <div class="row row-cols-4 p-2">
                 <div class="col">
                     DE:
-                    <select name="" id="cboDe" class="from-control">
-                        <option value="Dolar">Dolar</option>
-                        <option value="Euro">Euro</option>
-                        <option value="Quetzal">Quetzal</option>
-                        <option value="Lempira">Lempira</option>
-                        <option value="Cordoba">Cordoba</option>
+                    <select id="cboDe" class="form-control">
+                        <option value="dolar">Dolar</option>
+                        <option value="euro">Euro</option>
+                        <option value="quetzal">Quetzales</option>
+                        <option value="lempira">Lempiras</option>
+                        <option value="cordoba">Cordobas</option>
                     </select>
                 </div>
-                A:
-                    <select name="" id="cboDe" class="from-control">
-                        <option value="Dolar">Dolar</option>
-                        <option value="Euro">Euro</option>
-                        <option value="Quetzal">Quetzal</option>
-                        <option value="Lempira">Lempira</option>
-                        <option value="Cordoba">Cordoba</option>
+                <div class="col">
+                    A:
+                    <select id="cboA" class="form-control">
+                        <option value="dolar">Dolar</option>
+                        <option value="euro">Euro</option>
+                        <option value="quetzal">Quetzales</option>
+                        <option value="lempira">Lempiras</option>
+                        <option value="cordoba">Cordobas</option>
                     </select>
+                </div>
             </div>
-        </div>
-        <div class="row row-cols-4">
-            <div class="col text-center"><input type="text" required="required" pattern="[0-9.]{1,}" placeholder="Cantidad" id="txtCantidadConversor" class="form-control">
+            <div class="row row-cols-4 p-2">
+                <div class="col text-center">
+                    <input type="text" required="required" pattern="[0-9.]{1,}" placeholder="Cantidad" id="txtCantidadConversor" class="form-control">
+                </div>
+                <div class="col text-center">
+                    <p class="bg-success text-white" id="lblRespuesta">Respuesta: ?</p>
+                </div>
             </div>
-            div.col.text-center>p.bg-success.text-white#lblRespuesta
+            <div class="row row-cols-2 p-2">
+                <div class="col text-center">
+                    <input type="submit" id="btnConvertir" value="Convertir" class="btn btn-primary">
+                </div>
+            </div>
         </div>
     </form>
 </body>
