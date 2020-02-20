@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,28 +13,30 @@
         <div class="container">
             <div class="row row-cols-2">
                 <div class="col text-center bg-info text-white">
-                    APP CONVERSORES
+                    CONVERSORES MONEDA, LONGITUD, ALMACENAMIENTO, PESO.
+                </div>
+            </div>
+            <div class="row row-cols-4 p-2">
+                <div class="col">
+                    CONVERTIR:
+                    <select id="cboConvertir" class="form-control" onchange="elegir_opcion()">
+                        <option value="seleccion">Seleccionar</option>
+                        <option value="moneda">Moneda</option>
+                        <option value="longitud">Longitud</option>
+                        <option value="almacenamiento">Almacenamiento</option>
+                        <option value="peso">Peso</option>
+                    </select>
                 </div>
             </div>
             <div class="row row-cols-4 p-2">
                 <div class="col">
                     DE:
                     <select id="cboDe" class="form-control">
-                        <option value="dolar">Dolar</option>
-                        <option value="euro">Euro</option>
-                        <option value="quetzal">Quetzales</option>
-                        <option value="lempira">Lempiras</option>
-                        <option value="cordoba">Cordobas</option>
                     </select>
                 </div>
                 <div class="col">
                     A:
                     <select id="cboA" class="form-control">
-                        <option value="dolar">Dolar</option>
-                        <option value="euro">Euro</option>
-                        <option value="quetzal">Quetzales</option>
-                        <option value="lempira">Lempiras</option>
-                        <option value="cordoba">Cordobas</option>
                     </select>
                 </div>
             </div>
