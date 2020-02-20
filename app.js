@@ -45,13 +45,11 @@ document.addEventListener("DOMContentLoaded", e=>{
         };
     });
   });
-  
-  //llenar los select box 
+   
   function elegir_opcion() {
     let opcion = document.getElementById('cboConvertir'),
     de1 = document.getElementById('cboDe'),
     a1 = document.getElementById('cboA');
-    //limpia antes de actualizar
     de1.value="";
     a1.value="";
     de1.innerHTML="";
