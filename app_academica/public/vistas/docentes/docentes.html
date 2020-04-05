@@ -1,10 +1,10 @@
-<form v-on:submit.prevent="guardarAlumno" data-accion="nuevo" data-idalumno='' id="frm-alumnos" method="POST">
+<form v-on:submit.prevent="guardarDocente" data-accion="nuevo" data-id_docente='' id="frmDocentes" method="POST">
     <div class="card text-white bg-secondary mb-3" style="max-width: 24rem;">
 
         <div class="card-header">
-            MANTENIMIENTO DE ALUMNOS
+            MANTENIMIENTO DE DOCENTES
 
-            <button type="button" id="btn-close-alumnos" class="close" aria-label="Close">
+            <button type="button" id="btn-close-docentes" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -16,7 +16,7 @@
                         CODIGO:
                     </div>
                     <div class="col">
-                        <input type="text" required v-model="alumno.codigo" placeholder="XXXX0000" class="form-control">
+                        <input type="text" required v-model="docente.codigo" placeholder="XXXX0000" class="form-control">
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                         NOMBRE:
                     </div>
                     <div class="col">
-                        <input type="text" required v-model="alumno.nombre" placeholder="AAA AAAA" class="form-control">
+                        <input type="text" required v-model="docente.nombre" placeholder="AAA AAAA" class="form-control">
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                         DIRECCION:
                     </div>
                     <div class="col">
-                        <input type="text" required v-model="alumno.direccion" placeholder="Usulutan" class="form-control">
+                        <input type="text" required v-model="docente.direccion" placeholder="Usulutan" class="form-control">
                     </div>
                 </div>
             </div>
@@ -48,7 +48,17 @@
                         TELEFONO:
                     </div>
                     <div class="col">
-                        <input type="text" required v-model="alumno.telefono" placeholder="0000-0000" class="form-control">
+                        <input type="text" required v-model="docente.telefono" placeholder="0000-0000" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row row-cols-1 p-2">
+                <div class="row-col">
+                    <div class="col">
+                        DUI:
+                    </div>
+                    <div class="col">
+                        <input type="text" required v-model="docente.dui" placeholder="00000000-0" class="form-control">
                     </div>
                 </div>
             </div>
@@ -56,11 +66,11 @@
             <div class="rows row-cols-1 p-2">
                 <div class="row-col text-center">
                     <div class="col">
-                        <input type="submit" id="btnGuardarAlumno" class="btn btn-outline-primary text-white" value="GUARDAR">
-                        <input type="reset" v-on:click="limpiarAlumno" id="" class="btn btn-outline-warning text-white"
-                            value="LIMPIAR">
-                        <input type="button" class="btn btn-outline-success mostrar-buscar-alumnos text-white" data-modulo="alumnos"
-                        data-form="buscar-alumnos" value="Buscar">
+                        <input type="submit" id="btnGuardarDocentes" class="btn btn-outline-primary text-white"
+                            value="GUARDAR">
+                        <input type="reset" id="" class="btn btn-outline-warning text-white" value="LIMPIAR">
+                        <input type="button" class="btn btn-outline-success mostrar-buscar-docentes text-white"
+                            data-modulo="docentes" data-form="buscar-docentes" value="BUSCAR">
                     </div>
                 </div>
             </div>
@@ -68,11 +78,11 @@
             <div class="row row-cols-1 p-2">
                 <div class="row-col text-center">
                     <div class="alert alert-success" role="alert">
-                        {{ alumno.msg }}
+                        {{ docente.msg }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </form>
-<script src="public/vistas/alumnos/alumnos.js"></script>
+<script src="public/vistas/docentes/docentes.js"></script>
