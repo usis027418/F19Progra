@@ -1,13 +1,13 @@
 var appdocente = new Vue({
-    el: '#frmDocentes',
+    el: '#frm-docentes',
     data: {
         docente: {
-            id_docente: 0,
+            idDocente: 0,
             accion: 'nuevo',
             codigo: '',
             nombre: '',
-            direccion: '',
             dui: '',
+            direccion: '',
             telefono: '',
             msg: ''
         }
@@ -16,12 +16,12 @@ var appdocente = new Vue({
         guardarDocente: function () {
             fetch(`private/modulos/docentes/procesos.php?proceso=recibirDatos&docente=${JSON.stringify(this.docente)}`).then(resp => resp.json()).then(resp => {
                 this.docente.msg = resp.msg;
-                this.docente.id_docente = 0;
+                this.docente.idDocente = 0;
                 this.docente.codigo = '';
                 this.docente.nombre = '';
+                this.docente.dui = '';
                 this.docente.direccion = '';
                 this.docente.telefono = '';
-                this.docente.dui = '';
                 this.docente.accion = 'nuevo';
                 appBuscarDocentes.buscarDocente();
             });

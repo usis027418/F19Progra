@@ -14,23 +14,16 @@ var appBuscarDocentes = new Vue({
             appdocente.docente = docente;
             appdocente.docente.accion = 'modificar';
         },
-        eliminarDocente: function (id_docente) {
-            let dialog = document.getElementById("dialogDocentes");
-            dialog.close();
-            dialog.showModal();
-
-
-            $(`#btnCancelarDocentes`).click(e=>{
-                dialog.close();
-            })
-
-            $(`#btnConfirmarDocentes`).click(e=>{
-                fetch(`private/modulos/docentes/procesos.php?proceso=eliminarDocente&docente=${id_docente}`).then(resp => resp.json()).then(resp => {
-                    this.buscarDocente();
+        eliminarDocente: function (idDocente) {
+            var mensaje = confirm("¿Estas seguro de eliminar este registro?");
+            if(mensaje){
+                alert("¡Se ha eliminado el registro con exito!");
+                fetch(`private/modulos/docentes/procesos.php?proceso=eliminarDocente&docente=${idDocente}`).then(resp => resp.json()).then(resp => {
+                this.buscarDocente();
                 });
-                dialog.close();
-            })
-            
+            } else {
+                alert("¡No se ha eliminado el registro!");
+            }
         }
     },
     created: function () {

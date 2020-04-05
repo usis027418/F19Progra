@@ -1,91 +1,85 @@
-<?php
+<?php 
+include('../../config/config.php');
+$docente = new docente($conexion);
 
-include('../../Config/config.php');
-$docentes= new docentes($conexion);
-
-$proceso='';
-
-if(isset($_GET['proceso']) && strlen($_GET['proceso'])>0){
-    $proceso=$_GET['proceso'];
+$proceso = '';
+if( isset($_GET['proceso']) && strlen($_GET['proceso'])>0 ){
+	$proceso = $_GET['proceso'];
 }
+$docente->$proceso( $_GET['docente'] );
+print_r(json_encode($docente->respuesta));
 
-$docentes->$proceso($_GET['docente']);
-print_r(json_encode($docentes->respuesta));
-
-class docentes{
-    private $datos=array(),$bd;
-    public $respuesta=['msg'=>'correcto'];
-
-    public function __construct($bd){
-        $this->bd=$bd;
+class docente{
+    private $datos = array(), $db;
+    public $respuesta = ['msg'=>'correcto'];
+    
+    public function __construct($db){
+        $this->db=$db;
     }
-
-    public function recibirDatos($docentes){
-        $this->datos=json_decode($docentes, true);
+    public function recibirDatos($docente){
+        $this->datos = json_decode($docente, true);
         $this->validar_datos();
     }
-
     private function validar_datos(){
-        if(empty($this->datos['codigo'])){
-            $this->respuesta['msg']='Por Favor Ingrese el codigo del Docente';
-        
+        if( empty($this->datos['codigo']) ){
+            $this->respuesta['msg'] = 'por favor ingrese el codigo del catedratico';
         }
-        if(empty($this->datos['nombre'])){
-            $this->respuesta['msg']='Por Favor Ingrese el nombre del Docente';
-
+        if( empty($this->datos['nombre']) ){
+            $this->respuesta['msg'] = 'por favor ingrese el nombre del catedratico';
         }
-        if(empty($this->datos['direccion'])){
-            $this->respuesta['msg']='Por Favor Ingrese la direccion del Docente';
-
+        if( empty($this->datos['dui']) ){
+            $this->respuesta['msg'] = 'por favor ingrese el dui del catedratico';
+        }
+        if( empty($this->datos['direccion']) ){
+            $this->respuesta['msg'] = 'por favor ingrese la direccion del catedratico';
+        }
+        if( empty($this->datos['telefono']) ){
+            $this->respuesta['msg'] = 'por favor ingrese el telefono del catedratico';
         }
         $this->almacenar_docente();
     }
-
     private function almacenar_docente(){
-        if($this->respuesta['msg']==='correcto'){
-            if($this->datos['accion']==="nuevo"){
-                $this->bd->consultas('
-                INSERT INTO docentes (codigo,nombre,direccion,dui,telefono) VALUES(
-                    "'. $this->datos['codigo'] .'",
-                    "'. $this->datos['nombre'] .'",
-                    "'. $this->datos['direccion'] .'",
-                    "'. $this->datos['dui'] .'",
-                    "'. $this->datos['telefono'] .'"
+        if( $this->respuesta['msg']==='correcto' ){
+            if( $this->datos['accion']==='nuevo' ){
+                $this->db->consultas('
+                    INSERT INTO docentes (codigo,nombre,dui,direccion,telefono) VALUES(
+                        "'. $this->datos['codigo'] .'",
+                        "'. $this->datos['nombre'] .'",
+                        "'. $this->datos['dui'] .'",
+                        "'. $this->datos['direccion'] .'",
+                        "'. $this->datos['telefono'] .'"
                     )
                 ');
-                $this->respuesta['msg']='Registro Insertado con Exito';
-            }else if($this->datos['accion']==='modificar'){
-                $this->bd->consultas('
-                UPDATE docentes SET 
-                codigo= "'. $this->datos['codigo'].'",
-                nombre= "'. $this->datos['nombre'].'",
-                direccion= "'. $this->datos['direccion'].'",
-                dui= "'. $this->datos['dui'].'",
-                telefono= "'.$this->datos['telefono'].'"
-                WHERE id_docente="'. $this->datos['id_docente'].'"
+                $this->respuesta['msg'] = 'Registro insertado correctamente';
+            } else if( $this->datos['accion']==='modificar' ){
+                $this->db->consultas('
+                   UPDATE docentes SET
+                        codigo     = "'. $this->datos['codigo'] .'",
+                        nombre     = "'. $this->datos['nombre'] .'",
+                        dui        = "'. $this->datos['dui'] .'",
+                        direccion  = "'. $this->datos['direccion'] .'",
+                        telefono   = "'. $this->datos['telefono'] .'"
+                    WHERE idDocente = "'. $this->datos['idDocente'] .'"
                 ');
-                $this->respuesta['msg']='Registro Actualizado con Exito';
+                $this->respuesta['msg'] = 'Registro actualizado correctamente';
             }
         }
     }
-
     public function buscarDocente($valor=''){
-        $this->bd->consultas('
-        SELECT docentes.id_docente, docentes.codigo, docentes.nombre, docentes.direccion,docentes.dui, docentes.telefono
-        FROM docentes
-        WHERE docentes.codigo LIKE "%'.$valor.'%" OR docentes.nombre LIKE "%'.$valor.'%" OR docentes.dui LIKE "%'.$valor.'%"
+        $this->db->consultas('
+            select docentes.idDocente, docentes.codigo, docentes.nombre, docentes.dui, docentes.direccion, docentes.telefono
+            from docentes
+            where docentes.codigo like "%'.$valor.'%" or docentes.nombre like "%'.$valor.'%" or docentes.dui like "%'.$valor.'%"
         ');
-        return $this->respuesta=$this->bd->obtener_datos();
+        return $this->respuesta = $this->db->obtener_datos();
     }
-
-    public function eliminarDocente($id_docente=''){
-        $this->bd->consultas('
-        DELETE docentes
-        FROM docentes
-        WHERE docentes.id_docente="'.$id_docente.'"
+    public function eliminarDocente($idDocente=''){
+        $this->db->consultas('
+            delete docentes
+            from docentes
+            where docentes.idDocente = "'.$idDocente.'"
         ');
-        $this->respuesta['msg']="Registro Eliminado con Exito";
+        $this->respuesta['msg'] = 'Registro eliminado correctamente';
     }
 }
-
 ?>
