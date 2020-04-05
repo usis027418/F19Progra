@@ -1,4 +1,4 @@
-<form method="POST" id="frm-buscar-docentes">
+<form method="POST" id="frm-buscar-docente">
     <div class="card text-white bg-dark mb-3" style="max-width: 48rem;">
         <div class="car-header">
             BUSQUEDA DOCENTES
@@ -8,19 +8,19 @@
             </button>
         </div>
         <div class="card-body">
-            <table id="tbl-buscar-docentes" class="table-striped table-dark table-bordered table-hover">
+            <table id="tbl-buscar-docente" class="table-striped table-dark table-bordered table-hover">
                 <thead>
                     <tr>
                         <th colspan="5">
-                            <input type="text" id="txtBuscarDocente" placeholder="codigo, nombre o NIT" class="form-control">
+                            <input type="text" id="txtBuscarDocente"  placeholder="codigo, nombre o nit" class="form-control">
                         </th>
                     </tr>
                     <tr>
                         <th>CODIGO</th>
                         <th>NOMBRE</th>
-                        <th>NIT</th>
                         <th>DIRECCION</th>
                         <th>TELEFONO</th>
+                        <th>NIT</th>
                         <th> </th>
                     </tr>
                 </thead>
@@ -30,4 +30,18 @@
             </table>
         </div>
     </div>
+    <dialog class="border-10 rounded bg-dark text-white border-primary text-center" id="dialogDocentes">
+        <p>Estas seguro de eliminar este registro???</p>
+
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-sm">
+                    <input class="btn btn-primary" type="button" id="btnConfirmarDocentes" Value="Aceptar">
+                </div>
+                <div class="col-sm">
+                    <input class="btn btn-danger" type="button" id="btnCancelarDocentes" Value="Cancelar">
+                </div>
+            </div>
+        </div>
+    </dialog>
 </form>

@@ -1,5 +1,6 @@
 <?php
-include('/app_academica/Private/conexion/DB.php');
-$conexion=new conexion('localhost','root','app_academica');
+
+include('../../Conexion/DB.php');
+$Conexion = new Conexion('localhost','root','','db_app_academica');
 
 ?>
