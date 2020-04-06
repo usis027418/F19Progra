@@ -1,6 +1,6 @@
 <?php 
-include('../../config/config.php');
-$alumno = new alumno($conexion);
+include('../../Config/Config.php');
+$alumno = new alumno($Conexion);
 
 $proceso = '';
 if( isset($_GET['proceso']) && strlen($_GET['proceso'])>0 ){
@@ -29,9 +29,6 @@ class alumno{
         }
         if( empty($this->datos['direccion']) ){
             $this->respuesta['msg'] = 'por favor ingrese la direccion del estudiante';
-        }
-        if( empty($this->datos['telefono']) ){
-            $this->respuesta['msg'] = 'por favor ingrese el telefono del estudiante';
         }
         $this->almacenar_alumno();
     }
@@ -64,7 +61,7 @@ class alumno{
         $this->db->consultas('
             select alumnos.idAlumno, alumnos.codigo, alumnos.nombre, alumnos.direccion, alumnos.telefono
             from alumnos
-            where alumnos.codigo like "%'.$valor.'%" or alumnos.nombre like "%'.$valor.'%" or alumnos.direccion like "%'.$valor.'%"
+            where alumnos.codigo like "%'.$valor.'%" or alumnos.nombre like "%'.$valor.'%" or alumnos.telefono like "%'.$valor.'%"
         ');
         return $this->respuesta = $this->db->obtener_datos();
     }

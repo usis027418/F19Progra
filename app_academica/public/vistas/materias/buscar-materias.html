@@ -1,7 +1,7 @@
-<form method="post" id="frm-buscar-materias">
-    <div class="card text-white bg-secondary mb-3" style="max-width: 48rem;">
+<form method="POST" id="frm-buscar-materias">
+    <div class="card text-white bg-dark mb-3" style="max-width: 48rem;">
         <div class="car-header">
-            BUSQUEDA MATERIAS
+            BUSQUEDA DE MATERIA
 
             <button type="button" id="btn-close-buscar-materias" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -12,31 +12,33 @@
                 <thead>
                     <tr>
                         <th colspan="5">
-                            <input type="text" v-model="valor" v-on:keyup="buscarMateria" placeholder="codigo o nombre o ciclo" 
-                                class="form-control">
+                            <input type="text" v-model="valor" v-on:keyup="buscarMateria"  placeholder="codigo, nombre, facultad o carrera" class="form-control">
                         </th>
                     </tr>
                     <tr>
                         <th>CODIGO</th>
                         <th>NOMBRE</th>
-                        <th>CICLO</th>
+                        <th>FACULTAD</th>
+                        <th>CARRERA</th>
+                      
                         <th> </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="catedra in mismaterias" :key="catedra.idMateria"
-                        v-on:click="modificarMateria(catedra)">
-                        <td>{{ catedra.codigo }}</td>
-                        <td>{{ catedra.nombre }}</td>
-                        <td>{{ catedra.ciclo }}</td>
+                    <tr v-for="asignatura in mismaterias" :key="asignatura.idMateria" v-on:click="modificarMateria(asignatura)">
+                        <td>{{ asignatura.codigo }}</td>
+                        <td>{{ asignatura.nombre }}</td>
+                        <td>{{ asignatura.facultad }}</td>
+                        <td>{{ asignatura.carrera }}</td>
+                       
                         <td>
-                            <input v-on:click="eliminarMateria(catedra.idMateria)" type="button" 
-                                class="btn btn-outline-danger text-white" value="del">
+                            <input v-on:click="eliminarMateria(asignatura.idMateria)" type="button" class="btn btn-outline-danger text-white" value="del">
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+
 </form>
 <script src="public/vistas/materias/buscar-materias.js"></script>

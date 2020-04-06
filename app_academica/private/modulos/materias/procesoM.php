@@ -1,18 +1,18 @@
-<?php
-include('../../config/config.php');
-$materia = new materia($conexion);
+<?php 
+include('../../Config/Config.php');
+$materia = new materia($Conexion);
 
 $proceso = '';
 if( isset($_GET['proceso']) && strlen($_GET['proceso'])>0 ){
 	$proceso = $_GET['proceso'];
 }
-$materia->$proceso($_GET['materia']);
+$materia->$proceso( $_GET['materia'] );
 print_r(json_encode($materia->respuesta));
 
 class materia{
     private $datos = array(), $db;
     public $respuesta = ['msg'=>'correcto'];
-
+    
     public function __construct($db){
         $this->db=$db;
     }
@@ -21,14 +21,17 @@ class materia{
         $this->validar_datos();
     }
     private function validar_datos(){
-        if( empty($this->datos['codigo'])){
-            $this->respuesta['msg'] = 'por favor ingrese el codigo de la catedra';
+        if( empty($this->datos['codigo']) ){
+            $this->respuesta['msg'] = 'por favor ingrese el codigo de la materia';
         }
-        if( empty($this->datos['nombre'])){
-            $this->respuesta['msg'] = 'por favor ingrese el nombre de la catedra';
+        if( empty($this->datos['nombre']) ){
+            $this->respuesta['msg'] = 'por favor ingrese el nombre de la materia';
         }
-        if( empty($this->datos['ciclo'])){
-            $this->respuesta['msg'] = 'por favor ingrese el ciclo de la catedra';
+        if( empty($this->datos['facultad']) ){
+            $this->respuesta['msg'] = 'por favor ingrese la facultad de la materia';
+		}
+		if( empty($this->datos['carrera']) ){
+            $this->respuesta['msg'] = 'por favor ingrese la carrera de la materia';
         }
         $this->almacenar_materia();
     }
@@ -36,10 +39,11 @@ class materia{
         if( $this->respuesta['msg']==='correcto' ){
             if( $this->datos['accion']==='nuevo' ){
                 $this->db->consultas('
-                    INSERT INTO materias (codigo,nombre,ciclo) VALUES(
+                    INSERT INTO materias (codigo,nombre,facultad,carrera) VALUES(
                         "'. $this->datos['codigo'] .'",
                         "'. $this->datos['nombre'] .'",
-                        "'. $this->datos['ciclo'] .'"
+                        "'. $this->datos['facultad'] .'",
+                        "'. $this->datos['carrera'] .'"
                     )
                 ');
                 $this->respuesta['msg'] = 'Registro insertado correctamente';
@@ -48,7 +52,8 @@ class materia{
                    UPDATE materias SET
                         codigo     = "'. $this->datos['codigo'] .'",
                         nombre     = "'. $this->datos['nombre'] .'",
-                        ciclo      = "'. $this->datos['ciclo'] .'"
+                        facultad  = "'. $this->datos['facultad'] .'",
+                        carrera   = "'. $this->datos['carrera'] .'"
                     WHERE idMateria = "'. $this->datos['idMateria'] .'"
                 ');
                 $this->respuesta['msg'] = 'Registro actualizado correctamente';
@@ -57,9 +62,9 @@ class materia{
     }
     public function buscarMateria($valor=''){
         $this->db->consultas('
-            select materias.idMateria, materias.codigo, materias.nombre, materias.ciclo
+            select materias.idMateria, materias.codigo, materias.nombre, materias.facultad, materias.carrera
             from materias
-            where materias.codigo like "%'.$valor.'%" or materias.nombre like "%'.$valor.'%" or materias.ciclo like "%'.$valor.'%"
+            where materias.codigo like "%'.$valor.'%" or materias.nombre like "%'.$valor.'%" or materias.facultad like "%'.$valor.'%" or materias.carrera like "%'.$valor.'%"
         ');
         return $this->respuesta = $this->db->obtener_datos();
     }
